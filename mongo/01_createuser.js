@@ -1,0 +1,1 @@
+db.createUser({user:"user1", pwd:"password", roles:[{role:"readWrite", db:"test_mongo_db"}]})

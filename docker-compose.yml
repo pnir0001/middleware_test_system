@@ -1,0 +1,53 @@
+version: '3'
+services:
+  test_api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    ports:
+      - 8080:8080
+    tty:
+      true
+
+  test_postgres_subscriber:
+    build:
+      context: .
+      dockerfile: ./postgres_subscriber/Dockerfile
+    tty:
+      true
+
+  test_redis_subscriber:
+    build:
+      context: .
+      dockerfile: ./redis_subscriber/Dockerfile
+    tty:
+      true
+
+  test_mongo_subscriber:
+    build:
+      context: .
+      dockerfile: ./mongo_subscriber/Dockerfile
+    tty:
+      true
+
+  test_nats_streaming:
+    image: nats-streaming:latest
+    restart: always
+    ports:
+    - 4222:4222
+    - 8222:8222
+
+  test-redis:
+    image: redis:latest
+    ports:
+    - 6379:6379
+
+  test_postgres:
+    build: ./postgres
+    ports:
+    - 5432:5432
+
+  test_mongo:
+    build: ./mongo
+    ports:
+    - 27017:27017
